@@ -31,3 +31,9 @@ $ cp .env.example .env
 $ npx hardhat vars set PRIVATE_KEY
 $ npx hardhat vars set ETHERSCAN_API_KEY
 ```
+
+## Deployment
+
+### Sepolia
+
+Find it in the [`deployed_addresses.json`](ignition/deployments/chain-11155111/deployed_addresses.json) file.
