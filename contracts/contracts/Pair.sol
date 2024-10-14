@@ -4,6 +4,7 @@ pragma solidity ^0.8.20;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/math/Math.sol";
+import "hardhat/console.sol";
 
 import "./interface/IPair.sol";
 
@@ -42,6 +43,8 @@ contract Pair is ERC20, IPair {
         // constructor_should_be_zero_after_initialize
         reserveA = 0;
         reserveB = 0;
+        tokenA = _tokenA;
+        tokenB = _tokenB;
         // tokenA_should_be_less_than_tokenB
         if (uint256(uint160(_tokenA)) > uint256(uint160(_tokenB))) {
             tokenA = _tokenB;
