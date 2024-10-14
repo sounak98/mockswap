@@ -32,6 +32,22 @@ $ npx hardhat vars set PRIVATE_KEY
 $ npx hardhat vars set ETHERSCAN_API_KEY
 ```
 
+## Testing
+
+This project uses Hardhat for testing. To run the tests:
+
+```bash
+# Run all tests
+$ npx hardhat test
+
+# Run tests with coverage report
+$ npx hardhat coverage
+```
+
+The test files are located in the `test` directory:
+
+- `Pair.test.ts`: Tests for the swap pair functionality
+
 ## Deployment
 
 ### Sepolia
