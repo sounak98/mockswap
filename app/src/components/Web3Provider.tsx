@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import { WagmiProvider, createConfig, webSocket } from "wagmi";
-import { sepolia } from "wagmi/chains";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ConnectKitProvider, getDefaultConfig } from "connectkit";
-import { ReactNode } from "react";
+import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
+import { ReactNode } from 'react';
+import { WagmiProvider, createConfig, webSocket } from 'wagmi';
+import { sepolia } from 'wagmi/chains';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const config = createConfig(
   getDefaultConfig({
@@ -13,8 +14,8 @@ const config = createConfig(
       [sepolia.id]: webSocket(process.env.NEXT_PUBLIC_RPC_URL!),
     },
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
-    appName: "mockswap",
-  })
+    appName: 'mockswap',
+  }),
 );
 
 const queryClient = new QueryClient();
