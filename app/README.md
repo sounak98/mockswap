@@ -14,7 +14,7 @@ To set up and run the project, follow these steps:
 
    ```bash
    $ git clone https://github.com/yourusername/mockswap.git
-   $ cd mockswap
+   $ cd mockswap/app
    ```
 
 2. Install dependencies:
