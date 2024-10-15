@@ -7,10 +7,8 @@ import {
   useWriteContract,
 } from 'wagmi';
 
+import pairArtifact from '@/abi/PairArtifact.json';
 import { tokensConfig } from '@/tokensConfig';
-
-// NOTE: imported from contracts project
-import pairArtifact from '../../../contracts/artifacts/contracts/Pair.sol/Pair.json';
 
 export function useSwap() {
   const [inToken, setInToken] = useState(tokensConfig.THB.symbol);
