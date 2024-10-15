@@ -79,12 +79,12 @@ export default function Home() {
           )}
           <button
             className={`w-full p-3 rounded-lg font-semibold transition-colors ${
-              isSwapLoading
+              isSwapLoading || !inAmount
                 ? 'bg-gray-400 cursor-not-allowed'
                 : 'bg-blue-500 text-white hover:bg-blue-600'
             }`}
             onClick={executeSwap}
-            disabled={isSwapLoading}
+            disabled={isSwapLoading || !inAmount}
           >
             {isSwapLoading ? (
               <div className="flex items-center justify-center">
