@@ -2,6 +2,10 @@
 
 MockSwap is a Next.js project that allows users to swap between Thai Baht (THB) and Carbon Credits (TVER) tokens on the Sepolia testnet.
 
+## Deployment
+
+The project is deployed on Vercel. You can find the live version at [mockswap.vercel.app](https://mockswap.vercel.app/).
+
 ## Setup and Run
 
 To set up and run the project, follow these steps:
