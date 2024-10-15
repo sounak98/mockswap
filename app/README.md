@@ -1,36 +1,81 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MockSwap
 
-## Getting Started
+MockSwap is a Next.js project that allows users to swap between Thai Baht (THB) and Carbon Credits (TVER) tokens on the Sepolia testnet.
 
-First, run the development server:
+## Setup and Run
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+To set up and run the project, follow these steps:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clone the repository:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   $ git clone https://github.com/yourusername/mockswap.git
+   $ cd mockswap
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
 
-## Learn More
+   ```bash
+   $ pnpm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+3. Copy the `env.example` file to `.env` in the root directory:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   $ cp env.example .env
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   Then, update the environment variables in the `.env` file as needed.
 
-## Deploy on Vercel
+   ```bash
+   NEXT_PUBLIC_RPC_WSS_URL="https://sepolia.drpc.org"
+   NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID="your_walletconnect_project_id"
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Run the development server:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+   ```bash
+   $ pnpm dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Basic Structure and Considerations
+
+The project is structured as follows:
+
+- `src/app`: Contains the main application pages and layout.
+- `src/components`: Reusable React components.
+- `src/hooks`: Custom React hooks for various functionalities.
+- `src/chainConfig.ts`: Configuration for the Sepolia testnet.
+- `src/tokensConfig.ts`: Configuration for the THB and TVER tokens.
+
+Key considerations:
+
+1. **Web3 Integration**: The project uses Wagmi and ConnectKit for seamless Web3 integration and wallet connections.
+
+2. **Token Swapping**: The `useSwap` hook in `src/hooks/useSwap.ts` handles the token swapping logic, including price estimation and execution.
+
+3. **Responsive Design**: The UI is built with Tailwind CSS, ensuring a responsive design across different devices.
+
+4. **Notifications**: Toast notifications are used to provide feedback on successful transactions and potential errors.
+
+5. **Code Organization**: The project follows a modular structure, separating concerns into components, hooks, and configuration files for better maintainability.
+
+## Implemented Features
+
+1. **Token Swapping**: Users can swap between THB and TVER tokens with real-time price estimation.
+
+2. **Wallet Connection**: Integration with various wallets through ConnectKit for a seamless connection experience.
+
+3. **Balance Display**: Real-time balance display for connected wallets.
+
+4. **Transaction Feedback**: Users receive immediate feedback on the status of their swap transactions.
+
+5. **Price Information**: The current exchange rate between THB and TVER is displayed during the swap process.
+
+## Future Features
+
+1. **Liquidity Provision**: Allow users to add and remove liquidity to the THB-TVER pair.
+
+2. **Transaction History**: Implement a feature to view past swap and liquidity transactions.
