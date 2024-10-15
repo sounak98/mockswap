@@ -3,13 +3,13 @@
 import { useMemo } from 'react';
 
 import { useBalance } from '@/hooks/useBalance';
-import { tokenConfig } from '@/tokenConfig';
+import { tokensConfig } from '@/tokensConfig';
 
 interface TokenInputProps {
   label: string;
   value: string;
   onChange?: (value: string) => void;
-  token: keyof typeof tokenConfig;
+  token: keyof typeof tokensConfig;
   readOnly?: boolean;
 }
 
@@ -20,8 +20,8 @@ export function TokenInput({
   token,
   readOnly = false,
 }: TokenInputProps) {
-  const tokenAddress = tokenConfig[token]?.address;
-  const tokenDecimals = tokenConfig[token]?.decimals;
+  const tokenAddress = tokensConfig[token]?.address;
+  const tokenDecimals = tokensConfig[token]?.decimals;
   const balance = useBalance(tokenAddress, tokenDecimals);
 
   const formattedBalance = useMemo(() => {

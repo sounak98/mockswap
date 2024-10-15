@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import { Toaster } from 'react-hot-toast';
 
 import { Footer } from '@/components/Footer';
 import { NavBar } from '@/components/NavBar';
@@ -34,6 +35,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Web3Provider>
+          <Toaster position="bottom-right" toastOptions={{ duration: 10000 }} />
           <div className="min-h-screen bg-gray-100 flex flex-col">
             <NavBar />
             {children}

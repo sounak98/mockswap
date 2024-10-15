@@ -3,17 +3,17 @@
 import { ConnectKitProvider, getDefaultConfig } from 'connectkit';
 import { ReactNode } from 'react';
 import { WagmiProvider, createConfig, webSocket } from 'wagmi';
-import { sepolia } from 'wagmi/chains';
 
+import { chainConfig } from '@/chainConfig';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const config = createConfig(
   getDefaultConfig({
-    chains: [sepolia],
+    chains: [chainConfig.chain],
     transports: {
-      [sepolia.id]: webSocket(process.env.NEXT_PUBLIC_RPC_URL!),
+      [chainConfig.chain.id]: webSocket(chainConfig.rpcWssUrl),
     },
-    walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!,
+    walletConnectProjectId: chainConfig.walletConnectProjectId,
     appName: 'mockswap',
   }),
 );

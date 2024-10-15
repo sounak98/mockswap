@@ -1,20 +1,54 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
+import { chainConfig } from '@/chainConfig';
 import { Card } from '@/components/Card';
 import { SwapButton } from '@/components/SwapButton';
 import { TokenInput } from '@/components/TokenInput';
+import { useSwap } from '@/hooks/useSwap';
 
 export default function Home() {
-  const [fromToken, setFromToken] = useState('TVER');
-  const [toToken, setToToken] = useState('THB');
-  const [swapAmount, setSwapAmount] = useState('');
+  const {
+    inToken,
+    setInToken,
+    outToken,
+    setOutToken,
+    inAmount,
+    setInAmount,
+    estimatedOutAmount,
+    executeSwap,
+    isSwapLoading,
+    isSwapSuccess,
+    txReceipt,
+    price,
+  } = useSwap();
 
-  const handleSwap = () => {
-    setFromToken(toToken);
-    setToToken(fromToken);
-  };
+  function switchTokens() {
+    setInToken(outToken);
+    setOutToken(inToken);
+    setInAmount(estimatedOutAmount);
+  }
+
+  useEffect(() => {
+    if (isSwapSuccess && txReceipt) {
+      setInAmount('');
+      toast.success(
+        <div className="flex flex-col gap-0.5">
+          <span>Swap posted on the blockchain successfully!</span>
+          <a
+            href={chainConfig.getTxUrl(txReceipt.transactionHash)}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-500 hover:text-blue-600"
+          >
+            Transaction Link
+          </a>
+        </div>,
+      );
+    }
+  }, [isSwapSuccess, txReceipt, setInAmount]);
 
   return (
     <div className="flex-grow flex items-center justify-center py-8">
@@ -24,22 +58,42 @@ export default function Home() {
           <div className="mb-2 relative">
             <TokenInput
               label="From"
-              value={swapAmount}
-              onChange={setSwapAmount}
-              token={fromToken}
+              value={inAmount}
+              onChange={setInAmount}
+              token={inToken}
             />
-            <SwapButton onClick={handleSwap} />
+            <SwapButton onClick={switchTokens} />
           </div>
           <div className="mt-2 mb-6">
             <TokenInput
               label="To"
-              value={swapAmount}
-              token={toToken}
+              value={estimatedOutAmount}
+              token={outToken}
               readOnly
             />
           </div>
-          <button className="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition-colors">
-            Swap
+          {price !== null && (
+            <p className="text-sm text-gray-600 mb-4">
+              Price: 1 {inToken} = {price} {outToken}
+            </p>
+          )}
+          <button
+            className={`w-full p-3 rounded-lg font-semibold transition-colors ${
+              isSwapLoading
+                ? 'bg-gray-400 cursor-not-allowed'
+                : 'bg-blue-500 text-white hover:bg-blue-600'
+            }`}
+            onClick={executeSwap}
+            disabled={isSwapLoading}
+          >
+            {isSwapLoading ? (
+              <div className="flex items-center justify-center">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                Swapping...
+              </div>
+            ) : (
+              'Swap'
+            )}
           </button>
         </Card>
       </div>
